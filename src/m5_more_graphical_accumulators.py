@@ -298,21 +298,26 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     p1 = rectangle1.get_center()
     p2 = rectangle2.get_center()
 
+    p1x = p1.x
+    p1y = p1.y
+    p2x = p2.x
+    p2y = p2.y
 
     for k in range(n):
-
-        line = rg.Line(p1,p2)
+        line = rg.Line(rg.Point(p1x,p1y),rg.Point(p2x,p2y))
         if ((k+1)%2)==0:
             line.color = rectangle2.outline_color
         else:
             line.color = rectangle1.outline_color
-
+        line.thickness = 5
         line.attach_to(window)
 
-        p1 = rectangle1.corner_2
-        p2 = rectangle2.corner_2
+        p1x = p1x - .5*(rectangle1.get_width())
+        p1y = p1y + .5*(rectangle1.get_height())
+        p2x = p2x - .5*(rectangle1.get_width())
+        p2y = p2y + .5*(rectangle1.get_height())
+        window.render()
 
-    window.render()
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
